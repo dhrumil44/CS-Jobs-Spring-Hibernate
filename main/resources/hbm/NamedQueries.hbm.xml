@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+          "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+          "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+          
+          <hibernate-mapping>
+          
+          <sql-query name="file.search">
+        <return class="csjobs.model.File" />
+<![CDATA[
+select * from files where
+    (content like upper(:term) || '%' or plainto_tsquery(:term) @@ tsv)
+    order by id asc
+]]>
+    </sql-query>
+    
+    </hibernate-mapping>
+    
